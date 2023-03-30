@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <link rel="stylesheet" href="../build/css/style.css">
+    <link rel="shortcut icon" href="./images/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="main">
+        <table class="calculator table">
+            <thead>
+                <tr>
+                    <td colspan=9>
+                        <div class="output form-group me-2">
+                            <div data-current-operand class="current-operand" id="display"></div>
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+
+            <tbody class="actions">
+                <tr>
+                    <td>
+                        <button class="btn btn-top mt-2 degree" value='deg'>DEG</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-top mt-2" value='fe'>F-E</button>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button class="btn shadow-none btn-top history mt-2 ms-3" value='His' data-bs-toggle="modal"
+                            id="" data-bs-target="#exampleModal-history"></button>
+
+                        <!-- History Modal -->
+                        <div class="modal fade" id="exampleModal-history" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">History</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" id="showHistory">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" id="close"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" id="delete"
+                                            onclick="removeHistory()">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="in-btn">
+                        <button class="btn shadow-none btn-top mem" value='MC' disabled>MC</button>
+                        <button class="btn shadow-none btn-top mem" value='MR' disabled>MR</button>
+                        <button class="btn shadow-none btn-top mem" value='M+' disabled>M+</button>
+                        <button class="btn shadow-none btn-top mem" value='M-' disabled>M-</button>
+                        <button class="btn shadow-none btn-top" value='MS'>MS</button>
+                        <button class="btn shadow-none btn-top" value='M' data-bs-toggle="modal"
+                            data-bs-target="#exampleModal-memory">
+                            M <i class="fa-solid fa-chevron-down"></i></button>
+
+                        <!-- Memory Modal -->
+                        <div class="modal fade" id="exampleModal-memory" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Memory</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" id="memory">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" id="close-btn"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger"
+                                            onclick="removeMemory()">delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <div class="dropdown">
+                            <button class="drop-trigo btn-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                &#9727; <small>Trigonometry</small>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <div class="trigo d-flex">
+                                    <li><button class="function btn dropdown-item" value="sin">sin</button></li>
+                                    <li><button class="function btn dropdown-item" value="cos">cos</button></li>
+                                    <li><button class="function btn dropdown-item" value="tan">tan</button></li>
+                                </div>
+                            </ul>
+                        </div>
+                    </td>
+
+                    <td colspan="2">
+                        <div class="dropdown mb-2">
+                            <button class="drop-trigo btn-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                &#402; <small>Function</small>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <div class="trigo d-flex">
+                                    <li><button class="function btn dropdown-item" value="rand">rand</button></li>
+                                    <li><button class="function btn dropdown-item" value="floor">floor</button></li>
+                                    <li><button class="function btn dropdown-item" value="ceil">ceil</button></li>
+                                </div>
+                            </ul>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <button class="function btn btn-op ms-1 nd" value='nd'>2<sup><small>nd</small></sup></button>
+                    </td>
+                    <td>
+                        <button class="function btn btn-op" value='pi'>π</button>
+                    </td>
+                    <td>
+                        <button class="function btn btn-op" value='e'>e</button>
+                    </td>
+                    <td>
+                        <button class="function btn btn-op" value='ce'>C</button>
+                    </td>
+                    <td>
+                        <button class="function btn btn-op" value="c" id="btn"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="ndfun function btn btn-op ms-1" value='x²'>x²</button>
+                        <button class="secondfn function btn btn-op ms-1" value='x³'>x³</button>
+                    </td>
+                    <td>
+                        <button class="function btn btn-op" value='1/x'>1/x</button>
+                    </td>
+                    <td>
+                        <button class="function btn btn-op" value='abs'>|x|</button>
+                    </td>
+                    <td>
+                        <button class="function btn btn-op" value='exp'>exp</button>
+                    </td>
+                    <td>
+                        <button class="function btn btn-op" value='mod' data-opration>mod</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="ndfun function btn btn-op ms-1"
+                            value='sqrt'><sup><small>2</small></sup>√x</button>
+                        <button class="secondfn function btn btn-op ms-1"
+                            value='cbrt'><sup><small>3</small></sup>√x</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-op bracket" value='*('>(</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-op bracket" value=')'> )</button>
+                    </td>
+                    <td>
+                        <button class="function btn btn-op" value='fact'>n!</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-op" value='/' data-opration>÷</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="ndfun two function btn btn-op ms-1" value='^' data-xpowery>x<sup>y</sup></button>
+                        <button class="secondfn two function btn btn-op ms-1" value='√'
+                            data-xrooty><sup><small>y</small></sup> √x</button>
+                    </td>
+                    <td>
+                        <button class="btn num" value='7' data-number>7</button>
+                    </td>
+                    <td>
+                        <button class="btn num" value='8' data-number>8</button>
+                    </td>
+                    <td>
+                        <button class="btn num" value='9' data-number>9</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-op" value='*' data-opration>x</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="ndfun function btn btn-op ms-1" value='tenx'>10<sup>x</sup></button>
+                        <button class="secondfn function btn btn-op ms-1" value='twox'>2<sup>x</sup></button>
+                    </td>
+                    <td>
+                        <button class="btn num" value='4' data-number>4</button>
+                    </td>
+                    <td>
+                        <button class="btn num" value='5' data-number>5</button>
+                    </td>
+                    <td>
+                        <button class="btn num" value='6' data-number>6</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-op" value='-' data-opration> -</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <button class="ndfun function btn btn-op ms-1" value='log'>log</button>
+                        <button class="secondfn two function btn btn-op ms-1" value='logy'>logy<sup>x</sup></button>
+                    </td>
+                    <td>
+                        <button class="btn num" value='1' data-number>1</button>
+                    </td>
+                    <td>
+                        <button class="btn num" value='2' data-number>2</button>
+                    </td>
+                    <td>
+                        <button class="btn num" value='3' data-number>3</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-op" value='+' data-opration>+</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="ndfun function btn btn-op mb-1 ms-1" value="ln">ln</button>
+                        <button class="secondfn function btn btn-op mb-1 ms-1" value="ex">e<sup>x</sup></button>
+                    </td>
+                    <td>
+                        <button class="function btn btn-op" value='minus'>+/-</button>
+                    </td>
+                    <td>
+                        <button class="btn num" value='0' data-number>0</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-op" value='.' data-number>.</button>
+                    </td>
+                    <td>
+                        <button class="function btn btn-op btn-color" value='='>=</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="../build/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

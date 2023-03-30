@@ -1,0 +1,104 @@
+body{
+    display:flex ;
+    justify-content: center;
+}
+
+.main {
+    display: inline-flex;
+    border: 1px solid black;
+    margin-top: 5%;
+    border-radius: 2px;
+}
+
+table td{
+    border:0;
+}
+
+.calculator {
+    box-sizing: border-box;
+    margin-bottom: 0 !important; 
+    font-family: verdana;
+    background-color: #f5f5f5;
+}
+
+.prev-operand , .current-operand, .display {
+    width: 418px;
+    border-radius: 4px;
+    border: none;
+    background-color: #f5f5f5;
+    display: block;
+    color: #333;
+    text-align: right;
+    margin-right: 10px;
+    margin-top: 20px;
+    font-size: 40px;
+    overflow-x: auto;
+}
+
+.calculator .btn {
+    color: #333;
+    width: 80px;
+    border: none;
+    height: 44px;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: medium;
+    margin-left: 2px;
+    margin-top: 3px;
+    box-shadow: 2px 2px 4px #cfcdcd;
+}
+
+.table>:not(caption)>*>* {
+    padding: 0 !important;
+}
+
+.calculator .btn-op {
+    background-color: #fff;
+}
+
+.btn-top {
+    color: #333 ;
+    width: 65px !important;
+    border: none !important;
+    height: 40px !important;
+    border-radius: 4px !important;
+    background-color: #f5f5f5 !important;
+    box-shadow: none !important;
+}
+
+.drop-trigo {
+    border: none !important;
+    background-color: #f5f5f5;
+}
+
+.btn-color {
+    background-color: rgb(24, 105, 166) !important;
+    color: #fff !important;
+}
+.memory{
+    margin-top: 10px;
+}
+
+.secondfn {
+ display: none !important;
+}
+
+.num {
+    font-weight: bold !important;
+}
+
+#btn {
+    background-image: url('../../src/images/backspace.png');
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: center;
+}
+
+.history {
+    background-image: url('../../src/images/history.png');
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: center;
+}
+
+
