@@ -69,6 +69,13 @@ function appendData(btnVal) {
             return;
         }
         if (btnVal === "*(") {
+            if (display.value.slice(-1) === "(" ||
+                (display.value === "*(" && btnVal === "*(")) {
+                display.value += "(";
+                return;
+            }
+        }
+        if (btnVal === "*(") {
             if (operators2.includes(display.value.slice(-1)) && btnVal === "*(") {
                 display.value += "(";
             }
@@ -410,4 +417,17 @@ function removeMemory() {
     localStorage.removeItem("memory");
     let closeBtn = document.querySelector("#close-btn");
     closeBtn.click();
+    let btnArray = Array.from(document.querySelectorAll(".mem"));
+    btnArray.forEach((element) => {
+        element.disabled = true;
+    });
 }
+(function memCheck() {
+    let result = localStorage.getItem("memory");
+    if (result != null) {
+        let btnArray = Array.from(document.querySelectorAll(".mem"));
+        btnArray.forEach((element) => {
+            element.disabled = false;
+        });
+    }
+})();
