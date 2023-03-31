@@ -3,6 +3,7 @@ const expressionBtns = document.querySelectorAll(".btn");
 let display = document.getElementById("display");
 const memorySaveBtn = document.querySelectorAll(".btn-top");
 let memory = [];
+var historyArray = [];
 var currentValue;
 const operators = [
     "1",
@@ -273,15 +274,14 @@ function chooseMemoryOperation(operation) {
     }
 }
 function memorySave() {
-    let currVal = currentValue.toString();
-    memory.push(currVal);
+    let currMemVal = currentValue.toString();
+    memory.push(currMemVal);
     localStorage.setItem("memory", memory.join(","));
 }
 function memoryRead() {
     let result = localStorage.getItem("memory");
     if (result != null) {
         let stringVal = result.split(",").slice(-1);
-        console.log(stringVal);
         display.value = stringVal;
     }
     else {
@@ -290,7 +290,6 @@ function memoryRead() {
 }
 function memoryShow() {
     let memValue = localStorage.getItem("memory");
-    console.log(memValue);
     var content = "";
     if (memValue !== null) {
         memValue.split(",").map((element) => {
@@ -303,14 +302,12 @@ function memoryShow() {
     }
 }
 function saveHistory(value) {
-    console.log(value);
-    let currVal = value.toString();
-    memory.push(currVal);
-    localStorage.setItem("history", memory.join(","));
+    let currHisVal = value.toString();
+    historyArray.push(currHisVal);
+    localStorage.setItem("history", historyArray.join(","));
 }
 function showHistory() {
     let hisValue = localStorage.getItem("history");
-    console.log(hisValue);
     var content = "";
     let counter = 1;
     if (hisValue !== null) {

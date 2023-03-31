@@ -2,6 +2,7 @@ const expressionBtns = document.querySelectorAll(".btn");
 let display = document.getElementById("display") as HTMLInputElement;
 const memorySaveBtn = document.querySelectorAll(".btn-top");
 let memory: string[] = [];
+var historyArray: string[] = [];
 var currentValue: number;
 
 const operators = [
@@ -264,8 +265,8 @@ function chooseMemoryOperation(operation: any) {
 }
 
 function memorySave() {
-  let currVal = currentValue.toString();
-  memory.push(currVal);
+  let currMemVal = currentValue.toString();
+  memory.push(currMemVal);
   localStorage.setItem("memory", memory.join(","));
 }
 
@@ -273,7 +274,6 @@ function memoryRead() {
   let result = localStorage.getItem("memory") as string | null;
   if (result != null) {
     let stringVal: any = result.split(",").slice(-1);
-    console.log(stringVal);
     display.value = stringVal;
   } else {
     display.value = "";
@@ -282,8 +282,6 @@ function memoryRead() {
 
 function memoryShow() {
   let memValue: string = localStorage.getItem("memory") as string;
-  console.log(memValue);
-
   var content = "";
   if (memValue !== null) {
     memValue.split(",").map((element) => {
@@ -296,16 +294,13 @@ function memoryShow() {
 }
 
 function saveHistory(value: string) {
-  console.log(value);
-  let currVal: string = value.toString();
-  memory.push(currVal);
-  localStorage.setItem("history", memory.join(","));
+  let currHisVal: string = value.toString();
+  historyArray.push(currHisVal);
+  localStorage.setItem("history", historyArray.join(","));
 }
 
 function showHistory() {
   let hisValue: string = localStorage.getItem("history") as string;
-  console.log(hisValue);
-
   var content = "";
   let counter = 1;
   if (hisValue !== null) {
