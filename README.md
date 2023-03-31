@@ -35,3 +35,11 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgements
 
 This project was inspired by the need for a powerful and easy-to-use scientific calculator that can run on Windows. It was developed using various libraries and frameworks such as TypeScript, React, Redux, and Webpack. Special thanks to the contributors who made this project possible.
+
+## Screenshot of scientific calculator
+
+<br>![image](https://user-images.githubusercontent.com/125361611/229029710-8f14cfcc-1e6a-4fc6-ac4f-93d1597dac28.png)
+
+
+
+
