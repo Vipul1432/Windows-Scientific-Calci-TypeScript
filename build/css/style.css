@@ -1,13 +1,20 @@
+html{
+    min-height: 100vh;
+}
 body{
+    min-height: 100vh;
     display:flex ;
     justify-content: center;
+    align-items: center;
 }
 
 .main {
     display: inline-flex;
     border: 1px solid black;
-    margin-top: 5%;
+    /* margin-top: 5%; */
+    align-items: center;
     border-radius: 2px;
+    border: 1px solid #22222222;
 }
 
 table td{
@@ -21,7 +28,7 @@ table td{
     background-color: #f5f5f5;
 }
 
-.prev-operand , .current-operand, .display {
+.current-operand, .display {
     width: 418px;
     border-radius: 4px;
     border: none;
@@ -39,13 +46,12 @@ table td{
     color: #333;
     width: 80px;
     border: none;
-    height: 44px;
+    height: 42px;
     border-radius: 4px;
     background-color: #fff;
     font-size: medium;
-    margin-left: 2px;
-    margin-top: 3px;
-    box-shadow: 2px 2px 4px #cfcdcd;
+    margin:2px 0px;
+    box-shadow: 2px 2px 4px #ebe8e8;
 }
 
 .table>:not(caption)>*>* {

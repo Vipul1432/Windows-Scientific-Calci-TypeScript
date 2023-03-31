@@ -33,6 +33,7 @@ let dotCheck: boolean = false;
 let checkDegree: boolean = false;
 let checkSecondFun: boolean = false;
 let checkOperator: boolean = false;
+let bracketCount: number = 0;
 
 function appendData(btnVal: any) {
   if (display.value === undefined) display.value = "0";
@@ -63,6 +64,7 @@ function appendData(btnVal: any) {
       if (!display.value.includes("*(") && !display.value.includes("(")) return;
     if (display.value === "" && btnVal === "*(") {
       display.value = "(";
+      bracketCount++;
       return;
     }
     if (btnVal === "*(") {
@@ -71,13 +73,18 @@ function appendData(btnVal: any) {
         (display.value === "*(" && btnVal === "*(")
       ) {
         display.value += "(";
+        bracketCount++;
         return;
       }
     }
     if (btnVal === "*(") {
       if (operators2.includes(display.value.slice(-1)) && btnVal === "*(") {
         display.value += "(";
-      } else display.value += btnVal.toString();
+        bracketCount++;
+      } else {
+        display.value += btnVal.toString();
+        bracketCount++;
+      }
     } else {
       if (operators2.includes(btnVal)) {
         if (checkOperator == false) return;
@@ -85,17 +92,27 @@ function appendData(btnVal: any) {
         checkOperator = false;
       } else {
         checkOperator == true;
+        if (btnVal === ")") {
+          if (bracketCount === 0) return;
+          else {
+            display.value += btnVal.toString();
+            bracketCount--;
+            return;
+          }
+        }
         display.value += btnVal.toString();
       }
     }
   }
 
   currentValue = Number(display.value);
+  var check;
   switch (btnVal) {
     case "c":
       display.value = display.value.toString().slice(0, -1);
       break;
     case "ce":
+      dotCheck = false;
       clear();
       break;
     case "=":
@@ -105,18 +122,28 @@ function appendData(btnVal: any) {
       saveHistory(display.value);
       break;
     case "mod":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value += "%";
       break;
     case "x²":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value = (currentValue * currentValue).toFixed().toString();
       break;
     case "x³":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value = (currentValue * currentValue * currentValue).toString();
       break;
     case "sqrt":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value = Math.sqrt(currentValue).toString();
       break;
     case "cbrt":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value = Math.cbrt(currentValue).toString();
       break;
     case "pi":
@@ -134,36 +161,56 @@ function appendData(btnVal: any) {
       }
       break;
     case "1/x":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value = (1 / currentValue).toFixed(5).toString();
       break;
     case "abs":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value = Math.abs(currentValue).toString();
       break;
     case "tenx":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value = Math.pow(10, currentValue).toString();
       break;
     case "twox":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value = Math.pow(2, currentValue).toString();
       break;
     case "^":
+      let val: number = Number(display.value.slice(-1));
+      if (isNaN(val)) return display.value;
       display.value += "**";
       break;
     case "√":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value = Math.cbrt(currentValue).toString();
       break;
     case "log":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value = Math.log10(currentValue).toFixed(7).toString();
       break;
     case "logy":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value = Math.log2(currentValue).toFixed(7).toString();
       break;
     case "ln":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value = Math.log(currentValue).toFixed(7).toString();
       break;
     case "e":
       display.value = Math.E.toFixed(5).toString();
       break;
     case "ex":
+      check = validateNumber();
+      if (check === false) return display.value;
       display.value = Math.exp(currentValue).toFixed(5).toString();
       break;
     case "exp":
@@ -192,6 +239,7 @@ function appendData(btnVal: any) {
       }
       break;
     case "rand":
+      dotCheck = true;
       display.value = Math.random().toFixed(5).toString();
       break;
     case "minus":
@@ -215,6 +263,12 @@ function appendData(btnVal: any) {
     default:
       break;
   }
+}
+
+function validateNumber() {
+  let value = Number(display.value);
+  if (isNaN(value)) return false;
+  return true;
 }
 
 function chooseMemoryOperation(operation: any) {
@@ -358,7 +412,13 @@ function clear() {
 }
 
 function calculate(current: any) {
-  display.value = eval(current);
+  try {
+    display.value = eval(current);
+  } catch (e) {
+    if (e instanceof SyntaxError) {
+      display.value = "SyntaxError";
+    }
+  }
 }
 
 function secondfunction() {
