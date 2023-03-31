@@ -175,7 +175,7 @@ function appendData(btnVal) {
         case "exp":
             if (isNaN(currentValue))
                 return;
-            display.value = Math.exp(currentValue).toFixed(5).toString();
+            display.value = currentValue.toExponential().toString();
             break;
         case "sin":
             if (checkDegree === true) {
