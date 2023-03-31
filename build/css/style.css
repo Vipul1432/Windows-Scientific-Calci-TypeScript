@@ -29,7 +29,7 @@ table td{
 }
 
 .current-operand, .display {
-    width: 418px;
+    width:405px;
     border-radius: 4px;
     border: none;
     background-color: #f5f5f5;
@@ -50,7 +50,7 @@ table td{
     border-radius: 4px;
     background-color: #fff;
     font-size: medium;
-    margin:2px 0px;
+    margin:1.5px 0.5px;
     box-shadow: 2px 2px 4px #ebe8e8;
 }
 
