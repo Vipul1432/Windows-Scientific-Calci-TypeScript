@@ -32,7 +32,14 @@ let checkDegree = false;
 let checkSecondFun = false;
 let checkOperator = false;
 let bracketCount = 0;
+let isInfinity = false;
 function appendData(btnVal) {
+    if (display.value == "SyntaxError" ||
+        display.value == "Infinity" ||
+        display.value == "-Infinity") {
+        if (operators.includes(btnVal))
+            isInfinity = true;
+    }
     if (display.value === undefined)
         display.value = "0";
     if (Number(display.value) == 0) {
@@ -45,6 +52,16 @@ function appendData(btnVal) {
     allowNum = false;
     if (operators.includes(btnVal)) {
         if (btnVal == ".") {
+            console.log(display.value);
+            if (display.value.includes(".")) {
+                if (!display.value.includes("+" || "-" || "*" || "/")) {
+                    dotCheck = true;
+                    console.log(display.value.slice(-1));
+                }
+            }
+            if (display.value.slice(-1) == ".") {
+                dotCheck = true;
+            }
             if (dotCheck)
                 return;
             else
@@ -84,6 +101,8 @@ function appendData(btnVal) {
                 bracketCount++;
             }
             else {
+                if (isInfinity === true)
+                    return;
                 display.value += btnVal.toString();
                 bracketCount++;
             }
@@ -91,6 +110,8 @@ function appendData(btnVal) {
         else {
             if (operators2.includes(btnVal)) {
                 if (checkOperator == false)
+                    return;
+                if (isInfinity === true)
                     return;
                 display.value += btnVal.toString();
                 checkOperator = false;
@@ -101,11 +122,15 @@ function appendData(btnVal) {
                     if (bracketCount === 0)
                         return;
                     else {
+                        if (isInfinity === true)
+                            return;
                         display.value += btnVal.toString();
                         bracketCount--;
                         return;
                     }
                 }
+                if (isInfinity === true)
+                    return;
                 display.value += btnVal.toString();
             }
         }
@@ -114,6 +139,12 @@ function appendData(btnVal) {
     var check;
     switch (btnVal) {
         case "c":
+            if (display.value == "SyntaxError" ||
+                display.value == "Infinity" ||
+                display.value == "-Infinity") {
+                display.value = "";
+                return;
+            }
             display.value = display.value.toString().slice(0, -1);
             break;
         case "ce":
@@ -160,6 +191,9 @@ function appendData(btnVal) {
             display.value = Math.PI.toFixed(5).toString();
             break;
         case "fact":
+            check = validateNumber();
+            if (check === false)
+                return display.value;
             if (currentValue === 0) {
                 return 1;
             }
@@ -196,6 +230,11 @@ function appendData(btnVal) {
             display.value = Math.pow(2, currentValue).toString();
             break;
         case "^":
+            if (display.value === "" || display.value === "0")
+                return;
+            check = validateNumber();
+            if (check === false)
+                return display.value;
             let val = Number(display.value.slice(-1));
             if (isNaN(val))
                 return display.value;
