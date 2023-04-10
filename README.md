@@ -2,6 +2,10 @@
 
 This is a Windows scientific calculator developed using TypeScript, HTML, and CSS. It includes a wide range of scientific functions such as trigonometry, logarithms, exponentials, and basic arithmetic operations.
 
+ ***To Test Live [Click here...](https://vipulkr123.github.io/TypeScript-Calci-Practical/)***
+ |---------------------------|
+ 
+
 ## Installation
 
 To use this calculator, follow these steps:
